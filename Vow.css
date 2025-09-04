@@ -1,0 +1,415 @@
+:root {
+    --bg: #0b1116;
+    --ink: #b7c7d3;
+    --ink-dim: #8aa0ad;
+    --accent: #8fc1d9;
+    --line: rgba(143, 193, 217, 0.18);
+}
+
+* { box-sizing: border-box;}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    line-height: 1.6;
+    letter-spacing: 0.02rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+border-bottom: 4px solid var(--line);
+}
+
+
+.transmission-preamble {
+   font-size: 0.6rem;
+   margin-bottom: 0;
+}
+
+
+.transmission-log {
+    font-size: 0.8rem;
+    margin-top: 0;
+}
+
+
+.begin-transmission {
+    text-align: center;
+}
+
+
+.begin-transmission h1 {
+    margin-bottom: 0em;
+}
+
+
+.begin-transmission h2 {
+    margin-top: 0;
+    font-size: 1.15rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.7rem ;
+}
+
+
+.begin-transmission h1,
+.begin-transmission h2 {
+    line-height: 1.2;
+}
+
+
+.vow-title {
+    font-size: 4rem;
+}
+
+
+.mission-text{
+    font-size: 1.25rem;
+    border-bottom: 4px solid var(--line);
+    padding-bottom: 1rem;
+}
+
+.large-text {
+font-size: 1.4rem;
+}
+
+
+/* This centers all content inside the page container */
+.page {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1rem 1rem;
+}
+
+
+#brothers {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 1.5rem 0 2rem;
+}
+
+#brothers > h2 {
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: 0.05em;
+}
+
+.brother {
+    margin: 0;
+}
+
+.brother-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: color 120ms ease, border-color 120ms ease;
+}
+
+.brother-header:hover {
+    color: var(--accent);
+}
+
+
+.brother-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.15rem;
+}
+
+.subject-meta {
+    font-family: var(--font-mono);
+    color: var(--ink-dim);
+    font-size: 0.9rem;
+    margin: 0;
+    letter-spacing: 0.03rem;
+    line-height: 1.2;
+}
+
+.brother-thumb {
+    order: 4;
+    margin-left: auto;
+    display: inline-block;
+    position: relative;
+    width: 75px;
+    height: auto;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    opacity: 0.9;
+}
+
+.brother-thumb > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%) sepia(100%) hue-rotate(165deg) saturate(150%) brightness(1);
+}
+
+.brother-thumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(143, 193, 217, 0.10) 0px,
+        rgba(143, 193, 217, 0.10) 1px,
+        transparent 2px,
+        transparent 3px
+        );
+        mix-blend-mode: screen;
+        opacity: 0.6;
+}
+
+brother-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+    linear-gradient(120deg,
+    rgba(255,255,255,0) 0%
+    rgba(143,193,217,0.08) 35%,
+    rgba(255,255,255,0) 65%);
+    mix-blend-mode: screen;
+    opacity: 0.5;
+}
+
+@keyframes glitch-shift {
+  0%   { transform: translate(0, 0); opacity: 0.0; }
+  10%  { transform: translate(-1px, 0); opacity: 0.25; }
+  20%  { transform: translate(1px, 0); opacity: 0.35; }
+  30%  { transform: translate(0, 0); opacity: 0.15; }
+  45%  { transform: translate(1px, -1px); opacity: 0.35; }
+  55%  { transform: translate(-1px, 1px); opacity: 0.25; }
+  70%  { transform: translate(0, 0); opacity: 0.10; }
+  85%  { transform: translate(-1px, 0); opacity: 0.30; }
+  100% { transform: translate(0, 0); opacity: 0.0; }
+}
+
+@keyframes scan-flicker {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.75; }
+}
+
+/* Reuse ::after for scanlines + subtle flicker */
+.brother-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(143, 193, 217, 0.10) 0px,
+      rgba(143, 193, 217, 0.10) 1px,
+      transparent 2px,
+      transparent 3px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+
+.brother-thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(0, 255, 255, 0.18);       
+  mix-blend-mode: screen;
+  opacity: 0;                                 
+  transform: translate(0,0);
+}
+
+.brother-header:hover .brother-thumb::before, 
+.brother.active .brother-thumb::before {
+    opacity: 1;
+    animation: glitch-shift 700ms steps(12, end) infinite;
+}
+
+.brother-header:hover .brother-thumb::after, 
+.brother.active .brother-thumb::after {
+animation: san-flicker 900ms ease-in-out infinite;
+}
+
+.brother-header:hover .brother-thumb > img,
+.brother.active .brother-thumb >img { 
+    filter: 
+    contrast(1)
+    brightness(1)
+    drop-shadow(1px 0 0 rgba(255, 0, 128, 0.15))
+    drop-shadow(-1px 0 0 rgba(0, 255, 255, 0.20));
+}
+
+
+.collapsible.active .collapsible-body {
+    display: block;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);  
+    }
+}
+
+
+#cosmic-archives {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 1.5rem 0 2rem;
+}
+
+#cosmic-archives > h2 {
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: 0.05em;
+}
+
+.cosmic-header {
+   gap: 0.75rem;
+    padding: 0.6rem 0;
+}
+
+
+.cosmic-header:hover {
+    color: var(--accent);
+}
+
+
+
+.collapsible-body {
+  display: none;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(0, 255, 255, 0.15);
+  animation: fadeIn 0.3s ease;
+  color: var(--ink);
+}
+
+
+.collapsible {
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: color 120ms ease, border-color 120ms ease;
+}
+
+.collapsible.active {
+    color: var(--accent);
+    border-bottom-color: rgba(143, 193,217, 0.35);
+}
+
+
+#creed {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin: 1.5rem 0 2rem;
+  margin-left: 20rem;
+  width: 600px;
+  position: relative;
+}
+
+#creed > img {
+    --distance: 5.25rem;
+    --set-width: 250px;
+    width: var(--set-width);
+    height: auto;   
+    display: block;
+    position: absolute;
+    &:nth-child(1) {
+        left: calc(0% - (var(--distance) + var(--set-width)))
+    }
+    &:nth-child(2) {
+        left: calc(100% + var(--distance))
+    }
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 1rem;
+    mix-blend-mode: color-dodge;
+    opacity: 0.5;
+    filter: saturate(10%)
+}
+
+#creed > *:not(.creed-heading, img) {
+    margin: 0 1.5rem;
+}
+
+.creed-heading {
+  display: flex;
+  flex-direction: column;
+  border-bottom: solid 1px var(--line);
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.creed-heading h3 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  padding-left: 4rem;
+  letter-spacing: 0.05em;
+}
+
+.creed-heading-border {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  margin-top: 0.5rem;
+  height: 1px;
+  background-color: var(--line);
+}
+
+.creed-entry h2 {
+    border-bottom: 1px solid var(--line); 
+    padding: 1rem 0;
+    margin-top: 0.7rem;
+}
+
+.creed-entry h4 {
+    font-size: 2rem;
+    padding-bottom: auto;
+    margin-top: auto;
+}
+
+.creed-quote {
+  background: rgba(255, 255, 255, 0.02);;
+  border-left: 2px solid #50c0ff;
+  color: #9fd8ff;
+  padding-top: 1.5rem;
+  padding-left: 3rem;
+  font-family: monospace;
+  font-size: 0.95rem;
+  margin-top: -1.5rem;
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  line-height: 2rem;
+}
+
+.creed-meta {
+    margin-top: -0.5rem;
+    padding: 1rem;
+    padding-left: 0rem;
+    border-bottom: 1px solid var(--line);
+    list-style: none;
+    padding-bottom: 1rem;
+    line-height: 2.5rem;
+}
